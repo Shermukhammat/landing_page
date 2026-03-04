@@ -27,13 +27,9 @@
 })();
 
 // ===== GALLERY IMAGES =====
-const galleryImages = [
-    'src/Хишрав-Т.Ж (8).jpg',
-    'src/Хишрав-Т.Ж (1).jpg',
-    'src/Хишрав-Т.Ж (2).jpg',
-    'src/Хишрав-Т.Ж (3).jpg',
-    'src/Хишрав-Т.Ж (4).jpg'
-];
+const galleryImages = Array.from(document.querySelectorAll('.gallery-item img'))
+    .map((img) => img.getAttribute('src'))
+    .filter(Boolean);
 let currentImageIndex = 0;
 
 // ===== LIGHTBOX =====
