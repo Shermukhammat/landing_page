@@ -33,33 +33,65 @@ const galleryImages = Array.from(document.querySelectorAll('.gallery-item img'))
 let currentImageIndex = 0;
 
 // ===== LIGHTBOX =====
+const lightboxEl = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+let touchStartX = 0;
+let touchStartY = 0;
+let touchActive = false;
+
 function openLightbox(index) {
     currentImageIndex = index;
-    const lightbox = document.getElementById('lightbox');
-    const img = document.getElementById('lightboxImg');
-    img.src = galleryImages[index];
-    lightbox.classList.add('active');
+    lightboxImg.src = galleryImages[index];
+    lightboxEl.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
+    lightboxEl.classList.remove('active');
     document.body.style.overflow = '';
 }
 
 function navigateLightbox(direction) {
     currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById('lightboxImg').src = galleryImages[currentImageIndex];
+    lightboxImg.src = galleryImages[currentImageIndex];
 }
 
 // Close lightbox on background click
-document.getElementById('lightbox').addEventListener('click', function (e) {
+lightboxEl.addEventListener('click', function (e) {
     if (e.target === this) closeLightbox();
+});
+
+// Swipe navigation on touch devices
+lightboxImg.addEventListener('touchstart', (e) => {
+    if (!lightboxEl.classList.contains('active')) return;
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchActive = true;
+}, { passive: true });
+
+lightboxImg.addEventListener('touchend', (e) => {
+    if (!touchActive) return;
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    const swipeThreshold = 40;
+
+    if (absX > swipeThreshold && absX > absY * 1.2) {
+        navigateLightbox(deltaX < 0 ? 1 : -1);
+    }
+    touchActive = false;
+});
+
+lightboxImg.addEventListener('touchcancel', () => {
+    touchActive = false;
 });
 
 // Keyboard navigation
 document.addEventListener('keydown', function (e) {
-    const lightbox = document.getElementById('lightbox');
+    const lightbox = lightboxEl;
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') navigateLightbox(-1);

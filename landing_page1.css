@@ -350,18 +350,6 @@ a {
     transform: scale(1.05);
 }
 
-.gallery-counter {
-    text-align: center;
-    font-size: 13px;
-    color: #94a3b8;
-    font-weight: 600;
-    padding: 0 24px;
-}
-
-.gallery-counter span {
-    color: #7c3aed;
-}
-
 /* ===== CTA SECTION ===== */
 .cta-section {
     padding: 40px 24px 48px;
