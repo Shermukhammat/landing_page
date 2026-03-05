@@ -82,7 +82,8 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: slowZoom 26s ease-in-out infinite alternate;
+    transform: scale(1);
+    animation: heroBgIntro 4.5s ease-in-out 1;
 }
 
 .hero-overlay {
@@ -106,7 +107,7 @@ a {
     align-items: center;
     gap: 12px;
     margin-top: 30vh; /* drop CTA further down the viewport */
-    animation: fadeInUp 0.6s ease-out 0.3s both;
+    animation: heroFadeUp 0.5s ease-out 0.35s both;
 }
 
 .hero h1 {
@@ -116,7 +117,7 @@ a {
     color: #f8f7ff;
     margin-top: 0;
     margin-bottom: 12px;
-    animation: fadeInUp 0.6s ease-out 0.1s both;
+    animation: heroFadeUp 0.45s ease-out 0.1s both;
 }
 
 .hero h1 span {
@@ -131,7 +132,7 @@ a {
     line-height: 1.7;
     max-width: 250px;
     margin: 0 auto 30px;
-    animation: fadeInUp 0.6s ease-out 0.2s both;
+    animation: heroFadeUp 0.5s ease-out 0.22s both;
 
     /* Soft sky blue — crisp on any background */
     color: #bae6fd;
@@ -301,14 +302,20 @@ a {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slowZoom {
-    from { transform: scale(1.0); }
-    to { transform: scale(1.04); }
+@keyframes heroBgIntro {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
 }
 
 .animate-on-scroll {
