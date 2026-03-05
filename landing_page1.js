@@ -1,3 +1,28 @@
+// ===== LINKS =====
+const TELEGRAM_URL = 'https://t.me/+6NaauKLUGMAxYzNi';
+
+const heroCta = document.getElementById('heroCta');
+if (heroCta) {
+    heroCta.href = TELEGRAM_URL;
+}
+
+document.querySelectorAll('.amenity-card').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+
+    card.addEventListener('click', () => {
+        window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
+    });
+
+    card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
+        }
+    });
+});
+
 // ===== SCROLL ANIMATIONS =====
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
