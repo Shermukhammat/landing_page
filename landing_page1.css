@@ -56,8 +56,8 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    padding: 40px 24px 48px;
+    justify-content: flex-start;
+    padding: 22vh 24px 96px;
 }
 
 /* Background Slideshow */
@@ -99,6 +99,7 @@ a {
 .hero-content {
     position: relative;
     z-index: 2;
+    margin-bottom: 0;
 }
 
 .hero-buttons {
@@ -106,6 +107,7 @@ a {
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    margin-top: 30vh; /* drop CTA further down the viewport */
     animation: fadeInUp 0.6s ease-out 0.3s both;
 }
 
@@ -114,7 +116,8 @@ a {
     font-weight: 900;
     line-height: 1.2;
     color: #fff;
-    margin-bottom: 16px;
+    margin-top: 0;
+    margin-bottom: 12px;
     animation: fadeInUp 0.6s ease-out 0.1s both;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
@@ -126,12 +129,17 @@ a {
 
 .hero p {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
     line-height: 1.7;
     max-width: 320px;
-    margin: 0 auto 36px;
+    margin: 0 auto 30px;
     animation: fadeInUp 0.6s ease-out 0.2s both;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #7c3aed, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
 }
 
 .btn-primary {
@@ -310,11 +318,19 @@ a {
     }
 
     .hero {
-        padding: 56px 32px 48px;
+        padding: 20vh 32px 120px;
+    }
+
+    .hero-content {
+        margin-bottom: 0;
     }
 
     .hero h1 {
         font-size: 36px;
+    }
+
+    .hero-buttons {
+        margin-top: 32vh;
     }
 
     .hero-image {
