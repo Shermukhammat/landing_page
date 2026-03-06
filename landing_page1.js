@@ -32,13 +32,28 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.05,
+    rootMargin: '0px 0px -20px 0px'
 });
 
 document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
 });
+
+// Ensure elements already inside the initial mobile viewport are revealed.
+const revealVisibleElements = () => {
+    document.querySelectorAll('.animate-on-scroll:not(.visible)').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add('visible');
+            observer.unobserve(el);
+        }
+    });
+};
+
+requestAnimationFrame(revealVisibleElements);
+window.addEventListener('load', revealVisibleElements);
+window.addEventListener('resize', revealVisibleElements);
 
 // ===== SCROLL PROGRESS =====
 window.addEventListener('scroll', () => {
