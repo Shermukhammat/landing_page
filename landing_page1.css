@@ -176,12 +176,14 @@ a {
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, filter 0.18s ease;
     box-shadow: 0 10px 30px rgba(16, 185, 129, 0.35), 0 0 0 rgba(16, 185, 129, 0.0);
     animation: fadeInUp 0.6s ease-out 0.3s both;
     position: relative;
     z-index: 2;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    will-change: transform;
 }
 
 .btn-primary:hover {
@@ -190,7 +192,31 @@ a {
 }
 
 .btn-primary:active {
-    transform: translateY(0);
+    transform: translateY(1px) scale(0.975);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.28), 0 0 0 rgba(16, 185, 129, 0.0);
+    filter: brightness(0.98);
+}
+
+.btn-primary:focus,
+.btn-primary:focus-visible {
+    outline: none;
+}
+
+.btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.14);
+    opacity: 0;
+    transform: scale(0.94);
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    pointer-events: none;
+}
+
+.btn-primary:active::before {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .btn-primary::after {
@@ -264,12 +290,18 @@ a {
     margin-bottom: 12px;
     transition: all 0.3s ease;
     border: 1px solid rgba(124, 58, 237, 0.06);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .amenity-card:hover {
     transform: translateX(4px);
     box-shadow: 0 4px 16px rgba(124, 58, 237, 0.08);
     border-color: rgba(124, 58, 237, 0.15);
+}
+
+.amenity-card:focus,
+.amenity-card:focus-visible {
+    outline: none;
 }
 
 .amenity-icon {
